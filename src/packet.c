@@ -450,6 +450,18 @@ const char *spgp_err_str(uint32_t err) {
   	case BUFFER_OVERFLOW:
     	return "Index into buffer exceeded the maximum "
       	"bound of the buffer.";
+    case GENERIC_ERROR:
+      return "Custom error: GENERIC_ERROR";
+    case INCOMPLETE_PACKET:
+      return "Custom error: INCOMPLETE_PACKET";
+    case DECRYPT_FAILED:
+      return "Custom error: DECRYPT_FAILED";
+    case GCRY_ERROR:
+      return "Custom error: GCRY_ERROR";
+    case KEYCHAIN_ERROR:
+      return "Custom error: KEYCHAIN_ERROR";
+    case ZLIB_ERROR:
+      return "Custom error: ZLIB_ERROR";
     default:
     	return "Unknown/undocumented error.";
   }
