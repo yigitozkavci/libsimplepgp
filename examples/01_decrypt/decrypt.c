@@ -12,7 +12,6 @@
 #define KEY_PASS "test"
 
 int main(int argc, char **argv) {
-  char seckey[SECKEY_BUF];
   char ctext[CTEXT_BUF];
   int fd;
   int seckey_len, ctext_len;
@@ -22,12 +21,16 @@ int main(int argc, char **argv) {
 
   printf("simplepgp decrypt example.\n");
 
-  fd = open("test1_sec.pgp", O_RDONLY);
-  if (fd < 0) { perror("seckey open"); return 1; }
-  if ((seckey_len = read(fd, seckey, SECKEY_BUF)) < 0) {
-    perror("seckey read"); return 1;
-  }
-  close(fd);
+  /* fd = open("test1_sec.pgp", O_RDONLY); */
+  /* if (fd < 0) { perror("seckey open"); return 1; } */
+  /* if ((seckey_len = read(fd, seckey, SECKEY_BUF)) < 0) { */
+  /*   perror("seckey read"); return 1; */
+  /* } */
+  /* close(fd); */
+  char seckey[SECKEY_BUF] = {
+    #include <generated_seckey.h>
+    , 0
+  };
 
   fd = open("ciphertext.pgp", O_RDONLY);
   if (fd < 0) { perror("cipher open"); return 1; }
