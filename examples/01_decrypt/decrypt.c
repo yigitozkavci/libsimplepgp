@@ -5,6 +5,8 @@
 #include <unistd.h>
 
 #include <simplepgp.h>
+#include <glib.h>
+#include <base64_encoded_seckey.h>
 
 #define SECKEY_BUF 2048
 #define CTEXT_BUF 1024
@@ -13,14 +15,18 @@
 
 int main(int argc, char **argv) {
   char ctext[CTEXT_BUF];
+  char seckey[SECKEY_BUF];
   int fd;
   int seckey_len, ctext_len;
+  unsigned long seckey_len_long;
   spgp_packet_t *pkt;
   char *data, *filename;
   uint32_t datalen, filenamelen;
 
   printf("simplepgp decrypt example.\n");
 
+  seckey = g_base64_decode(BASE64_ENCODED_SECKEY, &seckey_len_long);
+  seckey_len = (int) seckey_len_long;
   /* fd = open("test1_sec.pgp", O_RDONLY); */
   /* if (fd < 0) { perror("seckey open"); return 1; } */
   /* if ((seckey_len = read(fd, seckey, SECKEY_BUF)) < 0) { */
