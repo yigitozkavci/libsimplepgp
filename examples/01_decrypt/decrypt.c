@@ -15,7 +15,7 @@
 
 int main(int argc, char **argv) {
   char ctext[CTEXT_BUF];
-  char seckey[SECKEY_BUF];
+  char *seckey;
   int fd;
   int seckey_len, ctext_len;
   unsigned long seckey_len_long;
@@ -33,10 +33,6 @@ int main(int argc, char **argv) {
   /*   perror("seckey read"); return 1; */
   /* } */
   /* close(fd); */
-  char seckey[SECKEY_BUF] = {
-    #include <generated_seckey.h>
-    , 0
-  };
 
   fd = open("ciphertext.pgp", O_RDONLY);
   if (fd < 0) { perror("cipher open"); return 1; }
